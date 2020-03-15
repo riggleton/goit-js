@@ -3,7 +3,7 @@ let message;
 
 let userPassword = prompt("Введите пароль: ");
 
-if (!userPassword) {
+if (userPassword === null) {
   message = "Отменено пользователем!";
 } else if (userPassword === ADMIN_PASSWORD) {
   message = "Добро пожаловать!";
