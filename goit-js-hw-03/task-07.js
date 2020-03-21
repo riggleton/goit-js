@@ -89,7 +89,7 @@ const account = {
   getTransactionTotal(type) {
     let total = 0;
     for (let i = 0; i < this.transactions.length; i++) {
-      if (type == this.transactions[i]["type"]) {
+      if (type === this.transactions[i]["type"]) {
         total += this.transactions[i]["amount"];
       }
     }
