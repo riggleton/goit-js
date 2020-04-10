@@ -23,16 +23,12 @@ class Car {
    *  isOn - заведен ли автомобиль, значения true или false. Изначально false
    *  distance - общий киллометраж, изначально 0
    */
-  constructor(obj) {
-    Object.values(obj).indexOf("speed") === -1
-      ? (this.speed = 0)
-      : (this.speed = obj.speed);
-    this.price = obj.price;
-    this.maxSpeed = obj.maxSpeed;
-    this.isOn = obj.isOn;
-    Object.values(obj).indexOf("distance") === -1
-      ? (this.distance = 0)
-      : (this.distance = obj.distance);
+  constructor({price, maxSpeed}) {
+    this.speed = 0;
+    this.price = price;
+    this.maxSpeed = maxSpeed;
+    this.isOn = false;
+    this.distance = 0;
   }
 
   /*
