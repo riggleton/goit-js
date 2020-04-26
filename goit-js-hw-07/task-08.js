@@ -5,17 +5,19 @@ const input = document.querySelector('#controls>input');
 
 let userInput;
 
-input.addEventListener('input', (e) => {
-    userInput = event.currentTarget.value;
-});
+// input.addEventListener('blur', (e) => {
+//     userInput = event.currentTarget.value;
+// });
 
 renderBtn.addEventListener('click', (e) => {
+    userInput = input.value;
     const boxesToDraw = createBoxes(userInput);
     placeForBoxes.append(...boxesToDraw);
 });
 
 destroyBtn.addEventListener('click', (e) => {
     destroyBoxes();
+    input.value = '';
 });
 
 function createBoxes(amount) {

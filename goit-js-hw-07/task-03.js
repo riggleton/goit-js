@@ -16,24 +16,22 @@ const images = [
   },
 ];
 
-let imageList = "";
 const list = document.querySelector("#gallery");
 list.style.display = "flex";
 list.style.flexDirection = "column";
 list.style.listStyle = "none";
 
-images.forEach((image) => {
-  imageList = imageList.concat(createImageElement(image.url, image.alt));
-});
+const imageList = images.reduce((acc, image) => {
+  return acc + createImageElement(image.url, image.alt);
+}, "");
 
 console.log(imageList);
 list.insertAdjacentHTML("afterbegin", imageList);
 
 function createImageElement(src, alt) {
-  const listItem = `
-  <li>
-    <img src = '${src}' alt = '${alt}' width = '1200px'></img>
-  </li>
-  `;
-  return listItem;
+  return `
+    <li>
+      <img src = '${src}' alt = '${alt}' width = '1200px'></img>
+    </li>
+    `;
 }
