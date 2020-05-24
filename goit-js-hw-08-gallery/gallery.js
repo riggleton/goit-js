@@ -12,7 +12,6 @@ gallery.insertAdjacentHTML("afterbegin", galleryMarkUp);
 gallery.addEventListener("click", handleGalleryClick);
 closeBtn.addEventListener("click", handleModalCloseClick);
 overlay.addEventListener("click", handleModalCloseClick);
-window.addEventListener('keydown', onKeyPress);
 
 function onKeyPress(event) {
   let index;
@@ -24,14 +23,14 @@ function onKeyPress(event) {
     case 39:
       index = galleryItems.findIndex(item => item.original === lightbox.src);
       if (index === galleryItems.length - 1) {
-        index = 0;
+        index = -1;
       }
       openOriginal(galleryItems[index+1].original);
       break;
     case 37:
       index = galleryItems.findIndex(item => item.original === lightbox.src);
       if (index <= 0) {
-        index = galleryItems.length - 1;
+        index = galleryItems.length;
       }
       openOriginal(galleryItems[index-1].original);
       break;
@@ -41,6 +40,7 @@ function onKeyPress(event) {
 
 function handleGalleryClick(event) {
   event.preventDefault();
+  window.addEventListener('keydown', onKeyPress);
   const targetImage = event.target;
   if (targetImage.nodeName !== "IMG") return;
   const fullSizeLink = targetImage.getAttribute("data-source");
@@ -49,7 +49,7 @@ function handleGalleryClick(event) {
 
 function openOriginal(link) {
   modal.classList.add("is-open");
-  // lightbox.setAttribute("src", link);
+  lightbox.setAttribute("src", link);
   lightbox.src = link;
 }
 
@@ -57,6 +57,7 @@ function handleModalCloseClick(event) {
   if (event.target === lightbox) return;
   modal.classList.remove("is-open");
   lightbox.setAttribute("src", "");
+  window.removeEventListener('keydown', onKeyPress);
 }
 
 function renderImage(acc, image) {
